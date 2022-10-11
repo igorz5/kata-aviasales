@@ -1,0 +1,43 @@
+@import "../../scss/mixins";
+
+.price-filter {
+  margin-bottom: 20px;
+}
+
+.logo-wrap {
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+
+  @include screen-mxw-576 {
+    flex-direction: column;
+  }
+}
+
+.left {
+  width: 100%;
+  max-width: 232px;
+
+  @include screen-mxw-576 {
+    max-width: none;
+    margin-bottom: 20px;
+    padding: 0 20px;
+  }
+}
+
+.right {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.more-btn {
+  margin-top: 20px;
+  width: 100%;
+}

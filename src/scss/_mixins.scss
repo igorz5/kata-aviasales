@@ -1,0 +1,5 @@
+@mixin screen-mxw-576 {
+  @media screen and (max-width: 576px) {
+    @content;
+  }
+}
