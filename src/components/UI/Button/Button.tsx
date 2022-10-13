@@ -7,12 +7,10 @@ interface ButtonProps extends React.PropsWithChildren {
   className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ className, children }) => {
+export const Button: React.FC<ButtonProps> = ({ className, children }) => {
   return (
     <button type="button" className={classNames(classes.button, className)}>
       {children}
     </button>
   );
 };
-
-export default Button;

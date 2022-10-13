@@ -41,19 +41,17 @@
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/lines-between-class-members": "off",
     "@typescript-eslint/no-unused-vars": "warn",
-    "react/require-default-props": [
-      "error",
-      {
-        "classes": "defaultProps",
-        "functions": "ignore"
-      }
-    ],
+    "@typescript-eslint/default-param-last": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "react/require-default-props": "off",
     "react/function-component-definition": "off",
     "react/static-property-placement": "off",
     "react/self-closing-comp": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
     "import/no-unresolved": [2, { "caseSensitive": false }],
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
     "import/order": [
       "warn",

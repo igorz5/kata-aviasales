@@ -9,7 +9,7 @@ interface TicketProps {
   data: ITicket;
 }
 
-const Ticket: React.FC<TicketProps> = ({ data }) => {
+export const Ticket: React.FC<TicketProps> = ({ data }) => {
   return (
     <div className={classes.ticket}>
       <div className={classes.header}>
@@ -56,5 +56,3 @@ const Ticket: React.FC<TicketProps> = ({ data }) => {
     </div>
   );
 };
-
-export default Ticket;

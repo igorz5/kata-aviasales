@@ -1,15 +1,17 @@
 import React from "react";
+import { Provider } from "react-redux";
 
 import classes from "./App.module.scss";
 
 import "../../scss/main.scss";
 import logo from "../../assets/logo.svg";
 
-import PriceFilter from "../PriceFilter/PriceFilter";
 import TransferPanel from "../TransferPanel/TransferPanel";
-import TicketList from "../TicketList/TicketList";
-import Button from "../UI/Button/Button";
+import PriceFilter from "../PriceFilter/PriceFilter";
+import { TicketList } from "../TicketList/TicketList";
+import { Button } from "../UI/Button/Button";
 import { ITicket } from "../../types/ITicket";
+import { store } from "../store/store";
 
 const initialTickets: ITicket[] = [
   { price: 12000, id: 1 },
@@ -20,23 +22,25 @@ const initialTickets: ITicket[] = [
 
 const App: React.FC = () => {
   return (
-    <div className="container">
-      <div className={classes["logo-wrap"]}>
-        <img src={logo} alt="logo" />
-      </div>
-      <div className={classes.main}>
-        <div className={classes.left}>
-          <TransferPanel />
+    <Provider store={store}>
+      <div className={classes.container}>
+        <div className={classes["logo-wrap"]}>
+          <img src={logo} alt="logo" />
         </div>
-        <div className={classes.right}>
-          <PriceFilter className={classes["price-filter"]} />
-          <TicketList tickets={initialTickets} />
-          <Button className={classes["more-btn"]}>
-            Показать еще 5 билетов!
-          </Button>
-        </div>
+        <main className={classes.main}>
+          <div className={classes.left}>
+            <TransferPanel />
+          </div>
+          <div className={classes.right}>
+            <PriceFilter className={classes["price-filter"]} />
+            <TicketList tickets={initialTickets} />
+            <Button className={classes["more-btn"]}>
+              Показать еще 5 билетов!
+            </Button>
+          </div>
+        </main>
       </div>
-    </div>
+    </Provider>
   );
 };
 
