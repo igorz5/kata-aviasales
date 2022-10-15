@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import classes from "./TransferPanel.module.scss";
 
 import { TransferFilters } from "../../types/TransferFilters";
-import { AppDispatch } from "../store/store";
-import { actions } from "../store/actions";
+import { AppDispatch } from "../../store/store";
+import { actions } from "../../store/actions";
 import { IAppState } from "../../types/IAppState";
 
 interface TransferPanelProps {

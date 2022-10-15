@@ -3,8 +3,8 @@ import { useDispatch, connect } from "react-redux";
 import classNames from "classnames";
 
 import classes from "./PriceFilter.module.scss";
-import { actions } from "../store/actions";
-import { AppDispatch } from "../store/store";
+import { actions } from "../../store/actions";
+import { AppDispatch } from "../../store/store";
 import { PriceFilters } from "../../types/PriceFilters";
 import { IAppState } from "../../types/IAppState";
 
@@ -19,7 +19,7 @@ interface PriceFilterProps {
   currentPriceFilter: PriceFilters;
 }
 
-export const PriceFilter: React.FC<PriceFilterProps> = ({
+const PriceFilter: React.FC<PriceFilterProps> = ({
   className,
   currentPriceFilter,
 }) => {

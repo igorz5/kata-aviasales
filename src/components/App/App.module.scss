@@ -42,7 +42,22 @@
   padding: 0 20px;
 }
 
-.more-btn {
+.right-bottom {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-top: 20px;
+}
+
+.more-btn {
   width: 100%;
+}
+
+.status {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.loader {
+  margin-bottom: 20px;
 }

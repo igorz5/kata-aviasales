@@ -1,7 +1,7 @@
 import React from "react";
 
+import format from "date-fns/format";
 import classes from "./Ticket.module.scss";
-import logo from "../../assets/s7_logo.png";
 
 import { ITicket } from "../../types/ITicket";
 
@@ -9,46 +9,104 @@ interface TicketProps {
   data: ITicket;
 }
 
-export const Ticket: React.FC<TicketProps> = ({ data }) => {
+const pad = (num: number) => {
+  return `0${num}`.slice(-2);
+};
+
+const minsToMS = (mins: number) => {
+  return mins * 60 * 1000;
+};
+
+const formatTransfersAmount = (amount: number) => {
+  if (amount === 0) {
+    return "Без пересадок";
+  }
+
+  if (amount === 1) {
+    return "1 пересадка";
+  }
+
+  return `${amount} пересадки`;
+};
+
+const formatDuration = (duration: number) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+
+  return `${pad(hours)}:${pad(minutes)}`;
+};
+
+const formatTime = (date: string, duration: number) => {
+  const dateA = new Date(date);
+  const dateB = new Date(dateA.getTime() + minsToMS(duration));
+
+  const pattern = "kk:mm";
+  return `${format(dateA, pattern)} - ${format(dateB, pattern)}`;
+};
+
+const formatTransfers = (transfers: string[]) => {
+  return transfers.join(", ");
+};
+
+const Ticket: React.FC<TicketProps> = ({ data }) => {
+  const { price, carrierLogoPath } = data;
+  const segA = data.segments[0];
+  const segB = data.segments[1];
   return (
     <div className={classes.ticket}>
       <div className={classes.header}>
         <div className={classes.price}>
-          {data.price.toLocaleString("ru-RU", {
+          {price.toLocaleString("ru-RU", {
             style: "currency",
             currency: "RUB",
           })}
         </div>
-        <img src={logo} alt="Logo" className={classes.logo} />
+        <img src={carrierLogoPath} alt="Logo" className={classes.logo} />
       </div>
       <div className={classes.body}>
         <ul className={classes.rows}>
           <li className={classes.row}>
             <div className={classes.col}>
-              <div className={classes.label}>MOW – HKT</div>
-              <div className={classes.text}>10:45 – 08:00</div>
+              <div className={classes.label}>
+                {segA.origin} – {segA.destination}
+              </div>
+              <div className={classes.text}>
+                {formatTime(segA.date, segA.duration)}
+              </div>
             </div>
             <div className={classes.col}>
               <div className={classes.label}>В пути</div>
-              <div className={classes.text}>21ч 15m</div>
+              <div className={classes.text}>
+                {formatDuration(segA.duration)}
+              </div>
             </div>
             <div className={classes.col}>
-              <div className={classes.label}>2 пересадки</div>
-              <div className={classes.text}>HKG, JNB</div>
+              <div className={classes.label}>
+                {formatTransfersAmount(segA.stops.length)}
+              </div>
+              <div className={classes.text}>{formatTransfers(segA.stops)}</div>
             </div>
           </li>
           <li className={classes.row}>
             <div className={classes.col}>
-              <div className={classes.label}>MOW – HKT</div>
-              <div className={classes.text}>11:20 – 00:50</div>
+              <div className={classes.label}>
+                {segA.origin} – {segB.destination}
+              </div>
+              <div className={classes.text}>
+                {formatTime(segB.date, segB.duration)}
+              </div>
             </div>
             <div className={classes.col}>
               <div className={classes.label}>В пути</div>
-              <div className={classes.text}>13ч 30м</div>
+              <div className={classes.text}>
+                {formatDuration(segB.duration)}
+              </div>
             </div>
             <div className={classes.col}>
-              <div className={classes.label}>1 пересадка</div>
-              <div className={classes.text}>HKG</div>
+              <div className={classes.label}>
+                {formatTransfersAmount(segB.stops.length)}
+              </div>
+              <div className={classes.text}>{formatTransfers(segB.stops)}</div>
             </div>
           </li>
         </ul>
@@ -56,3 +114,5 @@ export const Ticket: React.FC<TicketProps> = ({ data }) => {
     </div>
   );
 };
+
+export default Ticket;

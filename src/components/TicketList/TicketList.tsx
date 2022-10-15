@@ -1,24 +1,29 @@
 import React from "react";
+import ViewportList from "react-viewport-list";
 
 import classes from "./TicketList.module.scss";
 
 import { ITicket } from "../../types/ITicket";
-import { Ticket } from "../Ticket/Ticket";
+import Ticket from "../Ticket/Ticket";
 
 interface TicketListProps {
   tickets?: ITicket[];
 }
 
-export const TicketList: React.FC<TicketListProps> = ({ tickets }) => {
+const TicketList: React.FC<TicketListProps> = ({ tickets }) => {
   return (
-    <ul className={classes["ticket-list"]}>
-      {tickets?.map((ticket) => {
-        return (
-          <li key={ticket.id} className={classes.item}>
-            <Ticket data={ticket} />
-          </li>
-        );
-      })}
+    <ul>
+      <ViewportList items={tickets} itemMinSize={184}>
+        {(item) => {
+          return (
+            <li key={item.id} className={classes.item}>
+              <Ticket data={item} />
+            </li>
+          );
+        }}
+      </ViewportList>
     </ul>
   );
 };
+
+export default TicketList;

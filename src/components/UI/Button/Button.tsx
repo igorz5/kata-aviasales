@@ -5,12 +5,19 @@ import classes from "./Button.module.scss";
 
 interface ButtonProps extends React.PropsWithChildren {
   className?: string;
+  onClick?: React.MouseEventHandler;
 }
 
-export const Button: React.FC<ButtonProps> = ({ className, children }) => {
+const Button: React.FC<ButtonProps> = ({ className, onClick, children }) => {
   return (
-    <button type="button" className={classNames(classes.button, className)}>
+    <button
+      type="button"
+      className={classNames(classes.button, className)}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
 };
+
+export default Button;
